@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  ztac-control-plane:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: zero-trust-access-control-platform:0.1.0
+    container_name: ztac-control-plane
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    user: "10001:10001"
+    environment:
+      - ZTAC_ENVIRONMENT=production
+      - ZTAC_DB_PATH=/app/data/zero_trust.db
+      - ZTAC_JWT_SECRET_KEY=ztac-production-super-secret-key-at-least-32-chars!
+      - ZTAC_API_HOST=0.0.0.0
+      - ZTAC_API_PORT=8000
+    volumes:
+      - ztac_data:/app/data
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  ztac_data:
+    driver: local
