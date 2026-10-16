@@ -43,4 +43,4 @@ jobs:
 
       - name: Automated Unit & Adversarial Test Suite
         run: |
-          pytest --cov=src/zero_trust --cov-report=term-missing --cov-fail-under=90
+          pytest --cov=zero_trust --cov-report=term-missing --cov-fail-under=90

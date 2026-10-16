@@ -82,13 +82,14 @@ mypy_path = "src"
 
 [tool.pytest.ini_options]
 minversion = "8.0"
-addopts = "-ra -q --cov=src/zero_trust --cov-report=term-missing --cov-fail-under=90"
+addopts = "-ra -q --cov=zero_trust --cov-report=term-missing --cov-fail-under=90"
 testpaths = ["tests"]
 asyncio_mode = "auto"
 
 [tool.coverage.run]
-source = ["src/zero_trust"]
+source = ["zero_trust"]
 branch = true
+
 
 [tool.coverage.report]
 exclude_lines = [
