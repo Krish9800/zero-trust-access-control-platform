@@ -30,6 +30,7 @@ Eliminates implicit trust perimeters by implementing continuous contextual authe
 ### 1. Local Setup
 ```bash
 # Clone and enter directory
+git clone https://github.com/Krish9800/zero-trust-access-control-platform.git
 cd zero-trust-access-control-platform
 
 # Create virtual environment and install package
